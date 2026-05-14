@@ -18,7 +18,7 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Contact us</h1>
           <p className="text-lg text-gray-500 max-w-xl mx-auto">
-            Have questions about Doczen? Need a custom plan? We&apos;d love to hear from you.
+            Have questions about Redactly? Need a custom plan? We&apos;d love to hear from you.
           </p>
         </div>
       </section>

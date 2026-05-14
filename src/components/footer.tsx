@@ -11,7 +11,7 @@ export function Footer() {
               <div className="w-6 h-6 rounded bg-gray-900 text-white flex items-center justify-center">
                 <FileText className="w-3.5 h-3.5" />
               </div>
-              Doczen
+              Redactly
             </div>
             <p className="text-sm text-gray-500">
               AI-powered document redaction for legal, medical, HR, and financial professionals.
@@ -46,7 +46,7 @@ export function Footer() {
 
         <div className="border-t border-gray-200 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} Doczen. All rights reserved.
+            &copy; {new Date().getFullYear()} Redactly. All rights reserved.
           </p>
           <p className="text-xs text-gray-400">
             Privacy-first. Files are processed in memory and deleted after download.

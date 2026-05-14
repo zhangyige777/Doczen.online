@@ -14,14 +14,14 @@ export default function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Acceptance of Terms</h2>
           <p>
-            By accessing or using Doczen (&quot;the Service&quot;), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service. We reserve the right to update these terms at any time, with notice provided to registered users for material changes.
+            By accessing or using Redactly (&quot;the Service&quot;), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service. We reserve the right to update these terms at any time, with notice provided to registered users for material changes.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">2. Description of Service</h2>
           <p>
-            Doczen provides an AI-powered document redaction tool that identifies and redacts personally identifiable information (PII) from PDF documents. The Service processes documents in your browser and via API calls to third-party AI providers for PII detection.
+            Redactly provides an AI-powered document redaction tool that identifies and redacts personally identifiable information (PII) from PDF documents. The Service processes documents in your browser and via API calls to third-party AI providers for PII detection.
           </p>
         </section>
 
@@ -31,14 +31,14 @@ export default function TermsPage() {
             You are responsible for the documents you upload and process through the Service. You represent that you have the right to process and redact those documents. You agree not to use the Service for any unlawful purpose or in violation of any applicable laws or regulations.
           </p>
           <p>
-            You are responsible for reviewing AI-suggested redactions before downloading. Doczen provides detection suggestions; final redaction decisions and their legal adequacy remain your responsibility.
+            You are responsible for reviewing AI-suggested redactions before downloading. Redactly provides detection suggestions; final redaction decisions and their legal adequacy remain your responsibility.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">4. Service Limitations</h2>
           <p className="mb-3">
-            Doczen is provided &quot;as is&quot; without warranties of any kind, either express or implied. While we strive for accuracy, AI-based PII detection may produce false positives (flagging non-sensitive text) or false negatives (missing actual PII).
+            Redactly is provided &quot;as is&quot; without warranties of any kind, either express or implied. While we strive for accuracy, AI-based PII detection may produce false positives (flagging non-sensitive text) or false negatives (missing actual PII).
           </p>
           <p>
             The current MVP version applies visual redactions using pdf-lib. These are permanent visual overlays but do not remove text from the PDF content stream. We are working on PyMuPDF integration for content-stream redaction in a future version.
@@ -58,7 +58,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">6. Limitation of Liability</h2>
           <p>
-            To the fullest extent permitted by law, Doczen and its operators shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service, including but not limited to damages resulting from incomplete redaction, data leaks, or compliance failures.
+            To the fullest extent permitted by law, Redactly and its operators shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service, including but not limited to damages resulting from incomplete redaction, data leaks, or compliance failures.
           </p>
         </section>
 

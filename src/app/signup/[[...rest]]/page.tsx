@@ -13,7 +13,7 @@ export default function SignupPage() {
         <div className="w-7 h-7 rounded-lg bg-gray-900 text-white flex items-center justify-center">
           <FileText className="w-4 h-4" />
         </div>
-        Doczen
+        Redactly
       </Link>
       <SignUp />
     </div>

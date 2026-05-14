@@ -427,7 +427,7 @@ export default function HomePage() {
             <span className="text-amber-600">in seconds, not hours</span>
           </h1>
           <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Upload a PDF, describe what to hide in plain English. Doczen uses AI to find
+            Upload a PDF, describe what to hide in plain English. Redactly uses AI to find
             and redact names, SSNs, addresses, financial accounts, and more.
           </p>
           <div className="flex items-center justify-center gap-4">
@@ -449,7 +449,7 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-14">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Doczen</h2>
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Redactly</h2>
             <p className="text-slate-500 max-w-xl mx-auto">
               Built for legal, medical, HR, and financial professionals who handle sensitive documents every day.
             </p>

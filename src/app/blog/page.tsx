@@ -10,7 +10,7 @@ const posts = [
     slug: "what-is-document-redaction",
     title: "What Is Document Redaction and Why Does It Matter?",
     excerpt: "A comprehensive guide to document redaction — what it is, when you need it, and how AI is changing the game for legal, medical, and financial professionals.",
-    author: "Doczen Team",
+    author: "Redactly Team",
     date: "2026-05-01",
     category: "Guide",
   },
@@ -18,7 +18,7 @@ const posts = [
     slug: "pii-compliance-checklist",
     title: "PII Compliance Checklist: GDPR, HIPAA, and CCPA in 2026",
     excerpt: "Stay compliant with evolving privacy regulations. A practical checklist for handling personally identifiable information across jurisdictions.",
-    author: "Doczen Team",
+    author: "Redactly Team",
     date: "2026-04-20",
     category: "Compliance",
   },
@@ -26,7 +26,7 @@ const posts = [
     slug: "ai-vs-regex-redaction",
     title: "AI vs. Regex: Why Smart Redaction Beats Pattern Matching",
     excerpt: "Traditional regex-based redaction misses context. Learn how AI-powered detection understands names, addresses, and sensitive data the way humans do.",
-    author: "Doczen Team",
+    author: "Redactly Team",
     date: "2026-04-10",
     category: "Technology",
   },
@@ -34,7 +34,7 @@ const posts = [
     slug: "redaction-mistakes-to-avoid",
     title: "5 Common Redaction Mistakes (and How to Avoid Them)",
     excerpt: "From incomplete blackouts to metadata leaks — the most frequent redaction failures and how modern tools prevent them.",
-    author: "Doczen Team",
+    author: "Redactly Team",
     date: "2026-03-25",
     category: "Guide",
   },
@@ -42,7 +42,7 @@ const posts = [
     slug: "financial-document-redaction",
     title: "Redacting Financial Documents: A Step-by-Step Guide",
     excerpt: "How to safely redact account numbers, tax IDs, income figures, and other sensitive data from financial statements and reports.",
-    author: "Doczen Team",
+    author: "Redactly Team",
     date: "2026-03-12",
     category: "Guide",
   },
@@ -62,7 +62,7 @@ export default function BlogPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Blog</h1>
           <p className="text-lg text-gray-500 max-w-xl mx-auto">
-            Guides, compliance tips, and product updates from the Doczen team.
+            Guides, compliance tips, and product updates from the Redactly team.
           </p>
         </div>
       </section>

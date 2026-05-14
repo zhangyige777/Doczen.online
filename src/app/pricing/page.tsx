@@ -243,7 +243,7 @@ export default function PricingPage() {
         <div className="max-w-xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Ready to get started?</h2>
           <p className="text-gray-500 mb-6">
-            Try Doczen for free. No credit card required. Upgrade anytime.
+            Try Redactly for free. No credit card required. Upgrade anytime.
           </p>
           <Link href="/#upload-section">
             <Button size="lg" className="gap-2 text-base px-8 h-12 rounded-xl bg-amber-600 hover:bg-amber-700 text-white shadow-md shadow-amber-200">

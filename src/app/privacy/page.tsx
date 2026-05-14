@@ -14,7 +14,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Information We Collect</h2>
           <p className="mb-3">
-            Doczen is designed with privacy as a core principle. We minimize data collection to what is strictly necessary to provide our service.
+            Redactly is designed with privacy as a core principle. We minimize data collection to what is strictly necessary to provide our service.
           </p>
           <p className="mb-3">
             <strong className="text-gray-900">Documents you upload:</strong> PDF files are processed entirely in your browser memory. They are never uploaded to our servers. The text content of each page is sent to our AI provider (apimart.ai) solely for the purpose of detecting personally identifiable information (PII). We do not store, log, or retain your document content.

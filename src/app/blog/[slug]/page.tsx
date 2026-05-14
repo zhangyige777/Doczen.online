@@ -13,7 +13,7 @@ const posts: Record<string, {
 }> = {
   "what-is-document-redaction": {
     title: "What Is Document Redaction and Why Does It Matter?",
-    author: "Doczen Team",
+    author: "Redactly Team",
     date: "2026-05-01",
     category: "Guide",
     body: `Document redaction is the process of permanently removing or obscuring sensitive information from documents before they are shared with others. It's a critical practice across legal, medical, financial, and government sectors — anywhere confidential data must be protected.
@@ -35,13 +35,13 @@ Traditionally, redaction meant printing documents, using a black marker, and sca
 
 ## The New Way: AI-Powered Redaction
 
-Modern tools like Doczen use AI to automatically detect PII with contextual understanding. Instead of just matching patterns (regex), AI understands that "John Smith" is a name, "555 Main Street" is an address, and "123-45-6789" is a Social Security number — even when they appear in different formats or contexts.
+Modern tools like Redactly use AI to automatically detect PII with contextual understanding. Instead of just matching patterns (regex), AI understands that "John Smith" is a name, "555 Main Street" is an address, and "123-45-6789" is a Social Security number — even when they appear in different formats or contexts.
 
 The process takes seconds instead of hours, catches more PII, and applies permanent visual redactions that cannot be undone.`,
   },
   "pii-compliance-checklist": {
     title: "PII Compliance Checklist: GDPR, HIPAA, and CCPA in 2026",
-    author: "Doczen Team",
+    author: "Redactly Team",
     date: "2026-04-20",
     category: "Compliance",
     body: `Navigating privacy regulations is complex, but protecting PII in your documents is a critical part of compliance. Here's a practical checklist organized by regulation.
@@ -64,7 +64,7 @@ Automate detection with AI-powered tools that catch more PII than manual review.
   },
   "ai-vs-regex-redaction": {
     title: "AI vs. Regex: Why Smart Redaction Beats Pattern Matching",
-    author: "Doczen Team",
+    author: "Redactly Team",
     date: "2026-04-10",
     category: "Technology",
     body: `For years, document redaction tools relied on regular expressions (regex) to find sensitive information. While regex is fast, it has fundamental limitations that AI-powered detection overcomes.
@@ -87,7 +87,7 @@ Regex is useful for simple pattern matching but insufficient for professional do
   },
   "redaction-mistakes-to-avoid": {
     title: "5 Common Redaction Mistakes (and How to Avoid Them)",
-    author: "Doczen Team",
+    author: "Redactly Team",
     date: "2026-03-25",
     category: "Guide",
     body: `Redaction seems simple — draw black boxes over sensitive text, right? Unfortunately, this approach has led to some of the most embarrassing data leaks in history. Here are five common mistakes and how to avoid them.
@@ -114,7 +114,7 @@ After redacting, always open the final document and verify: try to select text i
   },
   "financial-document-redaction": {
     title: "Redacting Financial Documents: A Step-by-Step Guide",
-    author: "Doczen Team",
+    author: "Redactly Team",
     date: "2026-03-12",
     category: "Guide",
     body: `Financial documents contain some of the most sensitive information an organization handles. Whether you're preparing documents for litigation, responding to an audit, or sharing reports with external stakeholders, proper redaction is essential.
