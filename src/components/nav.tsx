@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { useAuth, UserButton } from "@clerk/nextjs";
 import { FileText, Menu, X } from "lucide-react";
@@ -10,7 +9,7 @@ import { getSubscription } from "@/lib/subscription";
 export function Nav() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const { isSignedIn } = useAuth();
-  const [isPro, setIsPro] = useState(() => getSubscription().plan === "pro");
+  const isPro = getSubscription().plan === "pro";
 
   return (
     <nav className="border-b border-gray-100 bg-white/80 backdrop-blur-md sticky top-0 z-50">

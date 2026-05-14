@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
@@ -31,13 +31,8 @@ export default function DashboardPage() {
     }
     return [];
   });
-  const [subscription, setSubscription] = useState(getSubscription());
-  const [pagesUsed, setPagesUsed] = useState(getPagesUsed());
-
-  useEffect(() => {
-    setSubscription(getSubscription());
-    setPagesUsed(getPagesUsed());
-  }, []);
+  const [subscription] = useState(getSubscription());
+  const [pagesUsed] = useState(getPagesUsed());
 
   const totalDocs = auditLog.length;
   const totalPages = auditLog.reduce((s, e) => s + e.pages, 0);
