@@ -8,7 +8,7 @@ import { Calendar, User, ArrowRight, Check } from "lucide-react";
 const posts = [
   {
     slug: "automated-redaction-guide",
-    title: "Automated Redaction Guide — How AI Redaction Software Works (2025)",
+    title: "Automated Redaction Guide — How AI Redaction Software Works",
     excerpt: "Learn how automated AI redaction works, how it compares to manual redaction, and why Redactly is the best free tool for automated document redaction.",
     author: "Redactly Team",
     date: "2026-05-14",
@@ -16,8 +16,8 @@ const posts = [
   },
   {
     slug: "best-redaction-software-2025",
-    title: "Best Redaction Software in 2025 — Free & Paid, Compared",
-    excerpt: "Compare the best redaction software tools of 2025. Free and paid options for PDF, Word, and Excel redaction. Find the right tool for your needs.",
+    title: "Best Redaction Software in 2026 — Free & Paid, Compared",
+    excerpt: "Compare the best redaction software tools of 2026. Free and paid options for PDF, Word, and Excel redaction. Find the right tool for your needs.",
     author: "Redactly Team",
     date: "2026-05-13",
     category: "Comparison",

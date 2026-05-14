@@ -6,12 +6,12 @@ import { FileText, Shield, Monitor, Globe, Apple, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "How to Redact a PDF — Free Online, Adobe & Mac Methods (2025) | Redactly",
+  title: "How to Redact a PDF — Free Online, Adobe & Mac Methods | Redactly",
   description:
     "Step-by-step guide to permanently redacting a PDF online for free or using Adobe Acrobat. Also covers Word and Excel redaction.",
   alternates: { canonical: "/how-to/redact-a-pdf" },
   openGraph: {
-    title: "How to Redact a PDF — Free Online, Adobe & Mac Methods (2025) | Redactly",
+    title: "How to Redact a PDF — Free Online, Adobe & Mac Methods | Redactly",
     description:
       "Step-by-step guide to permanently redacting a PDF online for free or using Adobe Acrobat. Also covers Word and Excel redaction.",
     url: "/how-to/redact-a-pdf",

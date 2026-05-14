@@ -5,13 +5,13 @@ import Link from "next/link";
 import { ArrowRight, Check, X, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Best Redaction Software in 2025 — Free & Paid, Compared | Redactly",
+  title: "Best Redaction Software in 2026 — Free & Paid, Compared | Redactly",
   description:
-    "Compare the best redaction software tools of 2025. Free and paid options for PDF, Word, and Excel redaction. Find the right tool for your needs.",
+    "Compare the best redaction software tools of 2026. Free and paid options for PDF, Word, and Excel redaction. Find the right tool for your needs.",
   openGraph: {
-    title: "Best Redaction Software in 2025 — Free & Paid, Compared | Redactly",
+    title: "Best Redaction Software in 2026 — Free & Paid, Compared | Redactly",
     description:
-      "Compare the best redaction software tools of 2025. Free and paid options for PDF, Word, and Excel redaction. Find the right tool for your needs.",
+      "Compare the best redaction software tools of 2026. Free and paid options for PDF, Word, and Excel redaction. Find the right tool for your needs.",
   },
 };
 
@@ -21,10 +21,10 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is the best free redaction software in 2025?",
+      name: "What is the best free redaction software?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Redactly is the best free redaction software in 2025. It is the only free tool that supports PDF, Word, and Excel files with AI-powered detection, permanent redaction, and no account required. Most other free tools only support PDF or have significant limitations.",
+        text: "Redactly is the best free redaction software. It is the only free tool that supports PDF, Word, and Excel files with AI-powered detection, permanent redaction, and no account required. Most other free tools only support PDF or have significant limitations.",
       },
     },
     {
@@ -65,9 +65,9 @@ const faqSchema = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Best Redaction Software in 2025 — Free & Paid, Compared",
+  headline: "Best Redaction Software in 2026 — Free & Paid, Compared",
   description:
-    "Compare the best redaction software tools of 2025. Free and paid options for PDF, Word, and Excel redaction. Find the right tool for your needs.",
+    "Compare the best redaction software tools of 2026. Free and paid options for PDF, Word, and Excel redaction. Find the right tool for your needs.",
   author: {
     "@type": "Organization",
     name: "Redactly",
@@ -101,11 +101,11 @@ export default function BestRedactionSoftwarePage() {
               Blog
             </Link>
             <span>/</span>
-            <span className="text-gray-900">Best Redaction Software 2025</span>
+            <span className="text-gray-900">Best Redaction Software</span>
           </nav>
 
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-            Best Redaction Software in 2025 — Free & Paid, Compared
+            Best Redaction Software in 2026 — Free & Paid, Compared
           </h1>
 
           <div className="flex items-center gap-3 text-sm text-gray-400 mb-10">
@@ -122,7 +122,7 @@ export default function BestRedactionSoftwarePage() {
             </p>
 
             <p>
-              In this comparison, we evaluate the leading redaction tools available in 2025 -- from free online options to professional-grade paid software -- to help you find the right fit for your needs.
+              In this comparison, we evaluate the leading redaction tools available today -- from free online options to professional-grade paid software -- to help you find the right fit for your needs.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">
@@ -391,7 +391,7 @@ export default function BestRedactionSoftwarePage() {
             </ul>
 
             <p>
-              Redactly uniquely combines three critical advantages: it is free, supports all three major document formats, and uses AI for automatic detection. For most individual users and small teams, this combination is unmatched in the 2025 market.
+              Redactly uniquely combines three critical advantages: it is free, supports all three major document formats, and uses AI for automatic detection. For most individual users and small teams, this combination is unmatched in the current market.
             </p>
 
             <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">
@@ -401,10 +401,10 @@ export default function BestRedactionSoftwarePage() {
             <div className="space-y-6 mt-6">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">
-                  What is the best free redaction software in 2025?
+                  What is the best free redaction software?
                 </h3>
                 <p className="text-gray-600">
-                  Redactly is the best free redaction software in 2025. It is the only free tool that supports PDF, Word, and Excel files with AI-powered detection, permanent redaction, and no account required. Most other free tools only support PDF or have significant limitations.
+                  Redactly is the best free redaction software. It is the only free tool that supports PDF, Word, and Excel files with AI-powered detection, permanent redaction, and no account required. Most other free tools only support PDF or have significant limitations.
                 </p>
               </div>
 

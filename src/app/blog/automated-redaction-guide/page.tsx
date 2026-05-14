@@ -5,11 +5,11 @@ import Link from "next/link";
 import { ArrowRight, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Automated Redaction Guide — How AI Redaction Software Works (2025) | Redactly",
+  title: "Automated Redaction Guide — How AI Redaction Software Works | Redactly",
   description:
     "Learn how automated AI redaction works, how it compares to manual redaction, and why Redactly is the best free tool for automated document redaction.",
   openGraph: {
-    title: "Automated Redaction Guide — How AI Redaction Software Works (2025) | Redactly",
+    title: "Automated Redaction Guide — How AI Redaction Software Works | Redactly",
     description:
       "Learn how automated AI redaction works, how it compares to manual redaction, and why Redactly is the best free tool for automated document redaction.",
   },

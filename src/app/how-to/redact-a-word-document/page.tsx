@@ -132,7 +132,7 @@ export default function RedactWordDocumentPage() {
               How-To Guide
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              How to Redact a Word Document &mdash; Free &amp; Secure (2025)
+              How to Redact a Word Document &mdash; Free &amp; Secure
             </h1>
             <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
               Microsoft Word has no built-in redaction tool. Learn how to permanently remove

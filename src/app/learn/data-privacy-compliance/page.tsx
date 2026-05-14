@@ -6,7 +6,7 @@ export const runtime = "edge";
 export const metadata: Metadata = {
   title: "Data Privacy Compliance — GDPR, HIPAA & CCPA Redaction Guide | Redactly",
   description:
-    "Ensure your document redaction process meets GDPR, HIPAA, and CCPA compliance requirements. Learn best practices for data privacy in 2025.",
+    "Ensure your document redaction process meets GDPR, HIPAA, and CCPA compliance requirements. Learn best practices for data privacy compliance.",
 };
 
 const faqItems = [

@@ -6,12 +6,12 @@ import { FileText, Shield, Search, CheckCircle2, XCircle, DollarSign } from "luc
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "How to Redact a PDF for Free — Top Online Tools Compared (2025) | Redactly",
+  title: "How to Redact a PDF for Free — Top Online Tools Compared | Redactly",
   description:
     "Need to redact a PDF for free? Compare the best free PDF redaction tools including Redactly, which also supports Word and Excel.",
   alternates: { canonical: "/how-to/redact-pdf-free" },
   openGraph: {
-    title: "How to Redact a PDF for Free — Top Online Tools Compared (2025) | Redactly",
+    title: "How to Redact a PDF for Free — Top Online Tools Compared | Redactly",
     description:
       "Need to redact a PDF for free? Compare the best free PDF redaction tools including Redactly, which also supports Word and Excel.",
     url: "/how-to/redact-pdf-free",
