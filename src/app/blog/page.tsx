@@ -105,7 +105,7 @@ export default function BlogPage() {
             <div>
               <Check className="w-8 h-8 text-green-500 mx-auto mb-2" />
               <h3 className="text-lg font-semibold text-gray-900 mb-1">Subscribed!</h3>
-              <p className="text-sm text-gray-500">You'll receive new articles in your inbox.</p>
+              <p className="text-sm text-gray-500">You&apos;ll receive new articles in your inbox.</p>
             </div>
           ) : (
             <>

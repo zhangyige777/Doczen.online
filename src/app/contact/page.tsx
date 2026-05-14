@@ -18,7 +18,7 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Contact us</h1>
           <p className="text-lg text-gray-500 max-w-xl mx-auto">
-            Have questions about Doczen? Need a custom plan? We'd love to hear from you.
+            Have questions about Doczen? Need a custom plan? We&apos;d love to hear from you.
           </p>
         </div>
       </section>
@@ -41,7 +41,7 @@ export default function ContactPage() {
           <div className="text-center p-12 rounded-xl bg-green-50 border border-green-100">
             <CheckCircle className="w-10 h-10 text-green-500 mx-auto mb-3" />
             <h3 className="text-lg font-semibold text-gray-900 mb-1">Message sent!</h3>
-            <p className="text-sm text-gray-500">We'll get back to you within 24 hours.</p>
+            <p className="text-sm text-gray-500">We&apos;ll get back to you within 24 hours.</p>
           </div>
         ) : (
           <form className="space-y-4" onSubmit={handleSubmit}>

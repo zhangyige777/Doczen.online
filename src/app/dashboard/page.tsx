@@ -20,19 +20,21 @@ interface AuditEntry {
 export default function DashboardPage() {
   const { isLoaded, isSignedIn } = useAuth();
   const { user } = useUser();
-  const [auditLog, setAuditLog] = useState<AuditEntry[]>([]);
-  const [subscription, setSubscription] = useState(getSubscription());
-  const [pagesUsed, setPagesUsed] = useState(0);
-
-  useEffect(() => {
-    const raw = localStorage.getItem("doczen-audit-log");
-    if (raw) {
+  const [auditLog, setAuditLog] = useState<AuditEntry[]>(() => {
+    if (typeof window !== "undefined") {
       try {
-        setAuditLog(JSON.parse(raw));
+        const raw = localStorage.getItem("doczen-audit-log");
+        return raw ? JSON.parse(raw) : [];
       } catch {
-        setAuditLog([]);
+        return [];
       }
     }
+    return [];
+  });
+  const [subscription, setSubscription] = useState(getSubscription());
+  const [pagesUsed, setPagesUsed] = useState(getPagesUsed());
+
+  useEffect(() => {
     setSubscription(getSubscription());
     setPagesUsed(getPagesUsed());
   }, []);

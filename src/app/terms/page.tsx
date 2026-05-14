@@ -14,7 +14,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Acceptance of Terms</h2>
           <p>
-            By accessing or using Doczen ("the Service"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service. We reserve the right to update these terms at any time, with notice provided to registered users for material changes.
+            By accessing or using Doczen (&quot;the Service&quot;), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service. We reserve the right to update these terms at any time, with notice provided to registered users for material changes.
           </p>
         </section>
 
@@ -38,7 +38,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">4. Service Limitations</h2>
           <p className="mb-3">
-            Doczen is provided "as is" without warranties of any kind, either express or implied. While we strive for accuracy, AI-based PII detection may produce false positives (flagging non-sensitive text) or false negatives (missing actual PII).
+            Doczen is provided &quot;as is&quot; without warranties of any kind, either express or implied. While we strive for accuracy, AI-based PII detection may produce false positives (flagging non-sensitive text) or false negatives (missing actual PII).
           </p>
           <p>
             The current MVP version applies visual redactions using pdf-lib. These are permanent visual overlays but do not remove text from the PDF content stream. We are working on PyMuPDF integration for content-stream redaction in a future version.

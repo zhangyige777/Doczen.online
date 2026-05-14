@@ -40,7 +40,7 @@ export default function PrivacyPage() {
             Free users: No document data is stored. Redacted files are generated in your browser and downloaded directly. We do not have access to your original or redacted documents.
           </p>
           <p>
-            Pro and Enterprise users: Audit logs and redaction certificates are stored in your browser's localStorage. You control this data and can clear it at any time. We plan to offer optional cloud backup for audit logs in the future.
+            Pro and Enterprise users: Audit logs and redaction certificates are stored in your browser&apos;s localStorage. You control this data and can clear it at any time. We plan to offer optional cloud backup for audit logs in the future.
           </p>
         </section>
 
