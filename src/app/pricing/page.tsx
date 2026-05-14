@@ -52,6 +52,7 @@ const monthlyTiers = [
     ],
     missing: [],
     cta: "Start free trial",
+    href: "",
     featured: true,
   },
   {
