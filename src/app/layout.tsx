@@ -18,25 +18,29 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Redactly — AI-Powered Document Redaction",
+    default: "Free AI Redaction Tool — Redact PDF, Word & Excel Online | Redactly",
     template: "%s | Redactly",
   },
   description:
-    "Redact sensitive data from PDFs, Word, and Excel files using AI. Upload your document, describe what to hide, and download a clean, redacted version in seconds. No watermark, no account required.",
+    "Redactly redacts sensitive information from PDF, Word, and Excel files using AI. Free online tool, no software needed. Supports .pdf .docx .xlsx.",
   keywords: [
     "document redaction",
     "AI redaction",
     "PDF redaction",
     "PII removal",
     "redact PDF",
+    "redact Word document",
+    "redact Excel",
     "sensitive data removal",
+    "free redaction tool",
+    "online redaction tool",
     "GDPR compliance",
     "HIPAA redaction",
   ],
   authors: [{ name: "Redactly" }],
   creator: "Redactly",
   publisher: "Redactly",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://doczen.ai"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://redactly.online"),
   alternates: {
     canonical: "/",
   },
@@ -45,23 +49,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: "Redactly",
-    title: "Redactly — AI-Powered Document Redaction",
+    title: "Free AI Redaction Tool — Redact PDF, Word & Excel Online | Redactly",
     description:
-      "Redact sensitive data from PDFs, Word, and Excel files using AI. No watermark, no account required.",
+      "Redactly redacts sensitive information from PDF, Word, and Excel files using AI. Free online tool, no software needed.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Redactly — AI Document Redaction",
+        alt: "Redactly — Free AI Document Redaction Tool",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Redactly — AI-Powered Document Redaction",
+    title: "Free AI Redaction Tool — Redact PDF, Word & Excel Online | Redactly",
     description:
-      "Redact sensitive data from PDFs, Word, and Excel files using AI. No watermark, no account required.",
+      "Redactly redacts sensitive information from PDF, Word, and Excel files using AI. Free online tool, no software needed.",
     images: ["/og-image.png"],
   },
   robots: {

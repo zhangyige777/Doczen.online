@@ -41,7 +41,7 @@ const features = [
 ];
 
 const steps = [
-  { step: 1, label: "Upload your PDF", desc: "Drag and drop any PDF up to 50MB." },
+  { step: 1, label: "Upload your document", desc: "Drag and drop a PDF, Word (.docx), or Excel (.xlsx) file." },
   { step: 2, label: "AI scans for PII", desc: "Claude detects names, SSNs, addresses, and more in seconds." },
   { step: 3, label: "Review & download", desc: "Confirm what to redact, download the clean document." },
 ];
@@ -422,13 +422,13 @@ export default function HomePage() {
             AI-Powered Document Redaction
           </div>
           <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-[1.1]">
-            Redact sensitive data
+            AI Redaction Tool —
             <br />
-            <span className="text-amber-600">in seconds, not hours</span>
+            <span className="text-amber-600">Redact PDF, Word & Excel Online, Free</span>
           </h1>
           <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Upload a PDF, describe what to hide in plain English. Redactly uses AI to find
-            and redact names, SSNs, addresses, financial accounts, and more.
+            Automatically redact sensitive data from any document. Supports PDF · Word (.docx) · Excel (.xlsx).
+            No software needed, no account required.
           </p>
           <div className="flex items-center justify-center gap-4">
             <Button size="lg" className="gap-2 text-base px-8 h-12 rounded-xl bg-amber-600 hover:bg-amber-700 text-white shadow-md shadow-amber-200" onClick={scrollToUpload}>
@@ -468,8 +468,39 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* How it works */}
+      {/* What Can You Redact */}
       <section className="py-20 bg-slate-50">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">What Can You Redact?</h2>
+            <p className="text-slate-500 max-w-xl mx-auto">
+              Redactly detects 25+ types of sensitive information with AI-powered precision.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              "Full Name", "Email Address", "Phone Number", "Social Security Number (SSN)",
+              "Bank Account Number", "Credit Card Number", "Driver&apos;s License", "Passport Number",
+              "Home Address", "Date of Birth", "Medical Record Number", "Tax ID (EIN/ITIN)",
+              "IP Address", "Employee ID", "Salary Information", "Customer ID",
+              "Vehicle Plate Number", "Insurance ID", "Digital Signature", "Login Credentials",
+              "Biometric Data", "Stock Trade Details", "Court Case Number", "Government Benefits Info",
+              "Visa/Immigration Details",
+            ].map((item) => (
+              <div
+                key={item}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white border border-slate-100 text-sm text-slate-700"
+              >
+                <div className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-14">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">How it works</h2>
@@ -491,11 +522,37 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Who Uses Redactly */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Who Uses Redactly?</h2>
+            <p className="text-slate-500 max-w-xl mx-auto">
+              From law firms to healthcare providers — professionals trust Redactly for secure document redaction.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-4">
+            {[
+              { role: "Legal Teams", desc: "Redact privileged information from discovery documents and court filings before sharing." },
+              { role: "Finance Teams", desc: "Remove account numbers and personal data from financial reports and bank statements." },
+              { role: "HR Professionals", desc: "Protect employee PII in payroll sheets, contracts, and onboarding documents." },
+              { role: "Healthcare", desc: "Ensure HIPAA compliance by redacting PHI from medical records and patient forms." },
+              { role: "Individuals", desc: "Safely share bank statements, ID documents, and personal files without exposing sensitive data." },
+            ].map((u) => (
+              <div key={u.role} className="p-6 rounded-2xl bg-white border border-slate-100 text-left">
+                <h3 className="font-semibold text-slate-900 mb-2">{u.role}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{u.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Upload */}
       <section id="upload-section" className="py-20 bg-white">
         <div className="max-w-2xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Ready to try?</h2>
-          <p className="text-slate-500 mb-8">Upload one or more PDFs and let AI find what needs redacting.</p>
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Try Redactly Free</h2>
+          <p className="text-slate-500 mb-8">Upload your document — PDF, Word (.docx), or Excel (.xlsx) — and let AI detect sensitive information automatically.</p>
           <Dropzone
             onFilesAccepted={handleFilesAccepted}
             existingFiles={files.map((f) => ({ id: f.id, filename: f.filename }))}
@@ -514,8 +571,39 @@ export default function HomePage() {
             <ArrowRight className="w-5 h-5" />
           </Button>
           {!hasFiles && (
-            <p className="mt-3 text-xs text-slate-400">Upload a PDF to get started</p>
+            <p className="mt-3 text-xs text-slate-400">Upload a document to get started</p>
           )}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-slate-900 mb-10 text-center">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {[
+              { q: "What is document redaction?", a: 'Document redaction is the process of permanently removing or obscuring sensitive information from a document before sharing it. Unlike simply hiding text, proper redaction ensures the underlying data cannot be recovered. Redactly uses AI to detect and permanently redact sensitive information across PDF, Word, and Excel files.' },
+              { q: "Is Redactly really free?", a: 'Yes. Redactly offers a free tier that covers up to 20 pages per month with no watermark and no account required. For higher volume needs, our Pro plan offers 200 pages per month with audit logs and batch processing.' },
+              { q: "Does Redactly support Word and Excel files?", a: 'Yes! Redactly is the only free online redaction tool that supports PDF, Word (.docx), and Excel (.xlsx) files. Other redaction tools only work with PDFs, requiring you to convert documents first. Redactly works directly with all three formats.' },
+              { q: "How does the AI redaction work?", a: 'Redactly uses Claude AI by Anthropic to analyze your document with contextual understanding. Unlike simple regex pattern matching, AI understands context — it knows \"John Smith\" is a name, \"555 Main Street\" is an address, and \"123-45-6789\" is a Social Security number.' },
+              { q: "Is my data secure?", a: 'Absolutely. Files are processed entirely in memory and permanently deleted immediately after you download the redacted version. We do not store, cache, or log your documents. No traces remain on our servers.' },
+              { q: "Can I review redactions before applying?", a: 'Yes. Redactly shows you every detected item highlighted on your document. You can keep or reject each detection before applying permanent redactions. This gives you full control over the final result.' },
+              { q: "What types of sensitive data can Redactly detect?", a: 'Redactly detects 25+ types of PII including names, email addresses, phone numbers, SSNs, bank account numbers, credit card numbers, passport details, medical record numbers, addresses, dates of birth, tax IDs, and more.' },
+              { q: "Do I need to create an account?", a: 'No account is needed to use Redactly\'s free tier. Simply upload your document and start redacting. An account is only required for Pro features like dashboard, audit logs, and higher page limits.' },
+            ].map((faq) => (
+              <details key={faq.q} className="group bg-white rounded-2xl border border-slate-100 overflow-hidden">
+                <summary className="flex items-center justify-between px-6 py-4 cursor-pointer text-sm font-medium text-slate-900 hover:text-amber-700 transition-colors">
+                  {faq.q}
+                  <span className="ml-2 shrink-0 text-slate-400 group-open:rotate-180 transition-transform">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                  </span>
+                </summary>
+                <div className="px-6 pb-4 text-sm text-slate-600 leading-relaxed">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
     </div>

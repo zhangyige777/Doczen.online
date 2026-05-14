@@ -1,11 +1,13 @@
 export const runtime = "edge";
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Calendar, User, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const posts: Record<string, {
   title: string;
+  description: string;
   author: string;
   date: string;
   category: string;
@@ -13,6 +15,7 @@ const posts: Record<string, {
 }> = {
   "what-is-document-redaction": {
     title: "What Is Document Redaction and Why Does It Matter?",
+    description: "Learn what document redaction is, why it matters for privacy compliance, and how AI-powered redaction tools automatically detect and remove sensitive information from PDFs, Word docs, and Excel files.",
     author: "Redactly Team",
     date: "2026-05-01",
     category: "Guide",
@@ -41,6 +44,7 @@ The process takes seconds instead of hours, catches more PII, and applies perman
   },
   "pii-compliance-checklist": {
     title: "PII Compliance Checklist: GDPR, HIPAA, and CCPA in 2026",
+    description: "A practical compliance checklist for GDPR, HIPAA, and CCPA document redaction. Learn how to protect PII in PDFs, Word documents, and Excel spreadsheets.",
     author: "Redactly Team",
     date: "2026-04-20",
     category: "Compliance",
@@ -64,6 +68,7 @@ Automate detection with AI-powered tools that catch more PII than manual review.
   },
   "ai-vs-regex-redaction": {
     title: "AI vs. Regex: Why Smart Redaction Beats Pattern Matching",
+    description: "Compare AI-powered redaction vs traditional regex pattern matching. Learn why AI detects more PII with fewer false positives across PDF, Word, and Excel documents.",
     author: "Redactly Team",
     date: "2026-04-10",
     category: "Technology",
@@ -87,6 +92,7 @@ Regex is useful for simple pattern matching but insufficient for professional do
   },
   "redaction-mistakes-to-avoid": {
     title: "5 Common Redaction Mistakes (and How to Avoid Them)",
+    description: "Learn the 5 most common document redaction mistakes that lead to data leaks, and how AI-powered tools help avoid them. Covers PDF, Word, and Excel redaction best practices.",
     author: "Redactly Team",
     date: "2026-03-25",
     category: "Guide",
@@ -114,6 +120,7 @@ After redacting, always open the final document and verify: try to select text i
   },
   "financial-document-redaction": {
     title: "Redacting Financial Documents: A Step-by-Step Guide",
+    description: "Step-by-step guide to redacting sensitive financial data from bank statements, reports, and spreadsheets. Protect account numbers, tax IDs, and personal data in PDF, Word, and Excel.",
     author: "Redactly Team",
     date: "2026-03-12",
     category: "Guide",
@@ -132,6 +139,33 @@ Third, review each detection: confirm it's actually PII, check that all occurren
 Finally, verify the output by opening the redacted document and confirming all intended PII is fully covered and the document is still readable. Generate a redaction certificate for your records — this documents what was redacted, when, and by whom, which is invaluable for compliance audits.`,
   },
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = posts[slug];
+  if (!post) {
+    return { title: "Post Not Found" };
+  }
+  return {
+    title: post.title,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: "article",
+      publishedTime: post.date,
+      authors: [post.author],
+    },
+    twitter: {
+      title: post.title,
+      description: post.description,
+    },
+  };
+}
 
 export default async function BlogPostPage({
   params,
