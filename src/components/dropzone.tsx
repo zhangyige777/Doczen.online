@@ -100,17 +100,18 @@ export function Dropzone({ onFilesAccepted, disabled, existingFiles = [], onRemo
               {existingFiles.map((f) => (
                 <div
                   key={f.id}
-                  className="flex items-center gap-3 px-4 py-2.5 bg-white border rounded-lg text-left"
+                  className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-white border rounded-lg text-left min-w-0"
                 >
                   <FileText className="w-4 h-4 text-blue-500 shrink-0" />
-                  <span className="text-sm text-gray-900 truncate flex-1">{f.filename}</span>
+                  <span className="text-sm text-gray-900 truncate flex-1 min-w-0">{f.filename}</span>
                   {onRemoveFile && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         onRemoveFile(f.id);
                       }}
-                      className="shrink-0 text-gray-400 hover:text-red-500 transition-colors"
+                      className="shrink-0 text-gray-400 hover:text-red-500 transition-colors p-2 -mr-1"
+                      aria-label={`Remove ${f.filename}`}
                     >
                       <X className="w-4 h-4" />
                     </button>
