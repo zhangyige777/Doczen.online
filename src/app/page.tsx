@@ -248,14 +248,21 @@ export default function HomePage() {
     return (
       <div className="h-[calc(100vh-57px)] flex flex-col">
         {/* Top bar */}
-        <div className="border-b bg-white px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" onClick={handleReset}>
+        <div className="border-b bg-white px-3 sm:px-4 py-3 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <Button variant="ghost" size="sm" onClick={handleReset} className="shrink-0">
               Back
             </Button>
-            <span className="text-sm text-slate-500 truncate max-w-[200px]">
+            <span className="text-sm text-slate-500 truncate max-w-[120px] sm:max-w-[300px]">
               {filename || files[0]?.filename}
             </span>
+            <button
+              onClick={handleReset}
+              className="shrink-0 text-gray-400 hover:text-red-500 transition-colors p-1"
+              aria-label="Remove file"
+            >
+              <X className="w-4 h-4" />
+            </button>
           </div>
           <StepIndicator status={status} />
         </div>
@@ -430,13 +437,13 @@ export default function HomePage() {
             Automatically redact sensitive data from any document. Supports PDF · Word (.docx) · Excel (.xlsx).
             No software needed, no account required.
           </p>
-          <div className="flex items-center justify-center gap-4">
-            <Button size="lg" className="gap-2 text-base px-8 h-12 rounded-xl bg-amber-600 hover:bg-amber-700 text-white shadow-md shadow-amber-200" onClick={scrollToUpload}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <Button size="lg" className="gap-2 text-base px-6 sm:px-8 h-12 w-full sm:w-auto rounded-xl bg-amber-600 hover:bg-amber-700 text-white shadow-md shadow-amber-200" onClick={scrollToUpload}>
               <FileText className="w-5 h-5" />
               Start Redacting
             </Button>
-            <Link href="/pricing">
-              <Button variant="outline" size="lg" className="text-base px-8 h-12 rounded-xl border-slate-200 text-slate-700 hover:bg-slate-50">
+            <Link href="/pricing" className="w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="text-base px-6 sm:px-8 h-12 w-full rounded-xl border-slate-200 text-slate-700 hover:bg-slate-50">
                 View Pricing
               </Button>
             </Link>

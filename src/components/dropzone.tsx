@@ -123,7 +123,7 @@ export function Dropzone({ onFilesAccepted, disabled, existingFiles = [], onRemo
               Add more files
             </div>
             <p className="text-xs text-gray-400">
-              {existingFiles.length} file{existingFiles.length > 1 ? "s" : ""} · PDF only · Max 50MB each
+              {existingFiles.length} file{existingFiles.length > 1 ? "s" : ""} · PDF only
             </p>
           </div>
         ) : (
@@ -142,7 +142,7 @@ export function Dropzone({ onFilesAccepted, disabled, existingFiles = [], onRemo
                   : "Drop your PDFs here or click to upload"}
               </p>
               <p className="text-sm text-gray-500 mt-1">
-                PDF only · Max 50MB each · Up to 10 files
+                PDF · Word & Excel coming soon · Max 50MB each · Up to 10 files
               </p>
             </div>
           </div>
