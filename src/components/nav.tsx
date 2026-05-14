@@ -39,7 +39,7 @@ export function Nav() {
               <Link href="/dashboard">
                 <Button variant="ghost" size="sm">Dashboard</Button>
               </Link>
-              <UserButton afterSignOutUrl="/" />
+              <UserButton />
             </>
           ) : (
             <>
@@ -75,7 +75,7 @@ export function Nav() {
                   )}
                 </div>
                 <div className="py-1">
-                  <UserButton afterSignOutUrl="/" />
+                  <UserButton />
                 </div>
               </>
             ) : (
