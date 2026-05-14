@@ -228,7 +228,7 @@ export default function HomePage() {
 
   const doBatchDownload = (f: BatchFile) => {
     if (!f.pdfBytes) return;
-    const blob = new Blob([f.pdfBytes], { type: "application/pdf" });
+    const blob = new Blob([f.pdfBytes as BlobPart], { type: "application/pdf" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
