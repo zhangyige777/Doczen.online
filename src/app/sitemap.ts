@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/use-cases/healthcare",
     "/vs/adobe-acrobat",
     "/vs/smallpdf",
+    "/vs/ai-redact",
     "/features/ai-redaction",
     "/features/batch-redaction",
   ];
