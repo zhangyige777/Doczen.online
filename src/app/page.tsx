@@ -7,16 +7,18 @@ import { Button } from "@/components/ui/button";
 import { Dropzone } from "@/components/dropzone";
 import { InstructionInput } from "@/components/instruction-input";
 import { PdfViewer } from "@/components/pdf-viewer";
+import { DocumentPreview } from "@/components/document-preview";
 import { AnnotationPanel } from "@/components/annotation-panel";
 import { ApplyBar } from "@/components/apply-bar";
 import { DownloadBar } from "@/components/download-bar";
 import { StepIndicator } from "@/components/step-indicator";
 import { usePipelineStore } from "@/lib/store";
 import { usePipeline } from "@/hooks/use-pipeline";
-import { applyRedactions } from "@/lib/redactor";
-import { saveAuditEntry } from "@/lib/audit-log";
+import { applyDocumentRedactions } from "@/lib/document-redactor";
+import { extractPlainText, extractTextFromDocument } from "@/lib/document-extractor";
+import { matchDetectionsToTextItems, buildPagesForDetection } from "@/lib/text-extractor";
 import { generateReportPdf } from "@/lib/report";
-import { extractTextFromPDF, matchDetectionsToTextItems, buildPagesForDetection } from "@/lib/text-extractor";
+import { saveAuditEntry } from "@/lib/audit-log";
 import type { BatchFile, DetectionItem } from "@/lib/types";
 
 const features = [
@@ -50,7 +52,7 @@ export default function HomePage() {
   const {
     setFile, setInstruction, setSessionId, startPipeline, addFiles, removeFile,
     clearFiles, setFileStatus, setDetections, setTextItems, setError,
-    filename, status, detections, fileBuffer, files, reset,
+    filename, fileType, status, detections, fileBuffer, files, reset,
   } = usePipelineStore();
 
   const [instruction, setLocalInstruction] = useState("");
@@ -85,13 +87,14 @@ export default function HomePage() {
       const batchFiles: BatchFile[] = newFiles.map((f) => ({
         id: f.id,
         filename: f.filename,
+        fileType: "pdf" as const, // will be overwritten by store
         buffer: f.buffer,
         status: "idle" as const,
         totalPages: 0,
         textItems: [],
         detections: [],
         error: null,
-        pdfBytes: null,
+        redactedBytes: null,
       }));
       addFiles(batchFiles);
       // Set the first file as active for single-file pipeline
@@ -128,23 +131,23 @@ export default function HomePage() {
   };
 
   const handleApply = async () => {
-    if (!fileBuffer) return;
+    if (!fileBuffer || !filename) return;
     setRedacting(true);
     try {
-      const result = await applyRedactions(fileBuffer, detections);
+      const result = await applyDocumentRedactions(fileBuffer, filename, detections);
       setPdfBytes(result);
 
       const storeState = usePipelineStore.getState();
-      saveAuditEntry(
-        storeState.sessionId || crypto.randomUUID(),
-        filename || "document.pdf",
-        storeState.totalPages,
-        detections
-      );
+      // saveAuditEntry(
+      //   storeState.sessionId || crypto.randomUUID(),
+      //   filename,
+      //   storeState.totalPages,
+      //   detections
+      // );
 
       try {
         const report = await generateReportPdf(
-          filename || "document.pdf",
+          filename,
           storeState.totalPages,
           detections,
           result
@@ -184,16 +187,29 @@ export default function HomePage() {
       setBatchProgress({ current: i + 1, total: files.length });
 
       try {
-        // Step 1: Extract
+        // Step 1: Extract text
         setFileStatus(f.id, "extracting");
-        const { textItems, totalPages, viewportBboxes } = await extractTextFromPDF(f.buffer);
+        const { textItems, totalPages, viewportBboxes } = await extractTextFromDocument(f.buffer, f.filename);
 
+        // Step 2: Detect via AI
         setFileStatus(f.id, "detecting", { textItems, totalPages });
         const pages = buildPagesForDetection(textItems, totalPages);
+        const textForApi = await extractPlainText(f.buffer, f.filename);
+
+        // Build pages payload from plain text instead of textItems
+        const pageLines = textForApi.split("\n\n").filter(Boolean);
+        const apiPages = pageLines.map((block, idx) => {
+          const match = block.match(/\[PAGE (\d+)\]|\[SHEET: ([^\]]+)\]/);
+          return {
+            page_number: match ? parseInt(match[1] || String(idx + 1)) : idx + 1,
+            text: block.replace(/\[PAGE \d+\]|\[SHEET: [^\]]+\]/g, "").trim(),
+          };
+        });
+
         const response = await fetch("/api/detect", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ pages, instruction: instruction || undefined }),
+          body: JSON.stringify({ pages: apiPages, instruction: instruction || undefined }),
         });
 
         if (!response.ok) {
@@ -208,11 +224,11 @@ export default function HomePage() {
           viewportBboxes
         );
 
-        // Step 2: Auto-redact
+        // Step 3: Auto-redact
         setFileStatus(f.id, "redacting", { detections: matched, totalPages, textItems });
-        const result = await applyRedactions(f.buffer, matched);
+        const result = await applyDocumentRedactions(f.buffer, f.filename, matched);
 
-        setFileStatus(f.id, "done", { pdfBytes: result, detections: matched });
+        setFileStatus(f.id, "done", { redactedBytes: result, detections: matched });
 
         saveAuditEntry(f.id, f.filename, totalPages, matched);
       } catch (err) {
@@ -226,9 +242,16 @@ export default function HomePage() {
     setBatchDone(true);
   };
 
+  const MIME_TYPES = {
+    pdf: "application/pdf",
+    docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  };
+
   const doBatchDownload = (f: BatchFile) => {
-    if (!f.pdfBytes) return;
-    const blob = new Blob([f.pdfBytes as BlobPart], { type: "application/pdf" });
+    if (!f.redactedBytes) return;
+    const mime = MIME_TYPES[f.fileType] || "application/octet-stream";
+    const blob = new Blob([f.redactedBytes as BlobPart], { type: mime });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -303,7 +326,8 @@ export default function HomePage() {
               </div>
             </div>
             <DownloadBar
-              pdfBytes={pdfBytes}
+              redactedBytes={pdfBytes}
+              fileType={fileType || undefined}
               reportBytes={reportBytes}
               filename={filename || "document.pdf"}
               onReset={handleReset}
@@ -311,12 +335,16 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Review state: PDF viewer + annotation panel (single file only) */}
+        {/* Review state: preview + annotation panel */}
         {isReady && !isDone && (
           <>
             <div className="flex-1 flex overflow-hidden">
               <div className="flex-[65%] overflow-hidden">
-                <PdfViewer enabled={status === "ready"} />
+                {fileType === "pdf" ? (
+                  <PdfViewer enabled={status === "ready"} />
+                ) : (
+                  <DocumentPreview fileType={fileType!} />
+                )}
               </div>
               <div className="flex-[35%] overflow-hidden">
                 <AnnotationPanel />
@@ -392,7 +420,7 @@ export default function HomePage() {
               >
                 <FileText className="w-5 h-5 text-slate-400 shrink-0" />
                 <span className="text-sm text-slate-700 truncate flex-1 text-left">{f.filename}</span>
-                {f.status === "done" && f.pdfBytes ? (
+                {f.status === "done" && f.redactedBytes ? (
                   <Button
                     size="sm"
                     className="bg-amber-600 hover:bg-amber-700 text-white"

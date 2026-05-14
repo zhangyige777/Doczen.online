@@ -37,8 +37,9 @@ export function Dropzone({ onFilesAccepted, disabled, existingFiles = [], onRemo
 
       // Validate all files first
       for (const file of accepted) {
-        if (file.type !== "application/pdf") {
-          setError("Only PDF files are supported");
+        const ext = file.name.toLowerCase().split(".").pop();
+        if (!["pdf", "docx", "xlsx"].includes(ext || "")) {
+          setError("Only PDF, Word (.docx), and Excel (.xlsx) files are supported");
           return;
         }
         if (file.size > 50 * 1024 * 1024) {
@@ -68,7 +69,11 @@ export function Dropzone({ onFilesAccepted, disabled, existingFiles = [], onRemo
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: { "application/pdf": [".pdf"] },
+    accept: {
+      "application/pdf": [".pdf"],
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"],
+    },
     maxFiles: 10,
     maxSize: 50 * 1024 * 1024,
     disabled: disabled || loading,
@@ -124,7 +129,7 @@ export function Dropzone({ onFilesAccepted, disabled, existingFiles = [], onRemo
               Add more files
             </div>
             <p className="text-xs text-gray-400">
-              {existingFiles.length} file{existingFiles.length > 1 ? "s" : ""} · PDF only
+              {existingFiles.length} file{existingFiles.length > 1 ? "s" : ""} · PDF · Word · Excel
             </p>
           </div>
         ) : (
@@ -143,7 +148,7 @@ export function Dropzone({ onFilesAccepted, disabled, existingFiles = [], onRemo
                   : "Drop your PDFs here or click to upload"}
               </p>
               <p className="text-sm text-gray-500 mt-1">
-                PDF · Word & Excel coming soon · Max 50MB each · Up to 10 files
+                PDF · Word (.docx) · Excel (.xlsx) · Max 50MB each · Up to 10 files
               </p>
             </div>
           </div>

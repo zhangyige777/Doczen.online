@@ -1,5 +1,5 @@
 import type { TextItem, TextItemMatch, DetectionItem, ViewportBBox } from "./types";
-import { getPdfjs, loadPdfDocument } from "./pdfjs";
+import { loadPdfDocument } from "./pdfjs";
 
 interface ExtractedData {
   textItems: TextItem[];

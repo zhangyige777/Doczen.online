@@ -1,10 +1,18 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { PipelineState, PipelineActions, BatchFile } from "./types";
+import type { PipelineState, PipelineActions, BatchFile, FileType } from "./types";
+
+const getFileType = (filename: string): FileType => {
+  const ext = filename.toLowerCase().split(".").pop();
+  if (ext === "docx") return "docx";
+  if (ext === "xlsx") return "xlsx";
+  return "pdf";
+};
 
 const initialState: PipelineState = {
   sessionId: null,
   filename: null,
+  fileType: null,
   instruction: "",
   status: "idle",
   statusMessage: "",
@@ -26,7 +34,9 @@ export const usePipelineStore = create<PipelineState & PipelineActions>()(
       setSessionId: (id) => set({ sessionId: id }),
 
       setFile: (buffer, filename) =>
-        set({ fileBuffer: buffer, filename, status: "idle", error: null }),
+        set({ fileBuffer: buffer, filename, fileType: getFileType(filename), status: "idle", error: null }),
+
+      setFileType: (type) => set({ fileType: type }),
 
       setInstruction: (instruction) => set({ instruction }),
 
@@ -57,12 +67,19 @@ export const usePipelineStore = create<PipelineState & PipelineActions>()(
         set({ status: "error", error, statusMessage: "Error" }),
 
       addFiles: (newFiles) =>
-        set((s) => ({
-          files: [...s.files, ...newFiles],
-          filename: s.files.length === 0 ? newFiles[0]?.filename : s.filename,
-          fileBuffer: s.files.length === 0 ? newFiles[0]?.buffer : s.fileBuffer,
-          status: "idle",
-        })),
+        set((s) => {
+          const filesWithType = newFiles.map((f) => ({
+            ...f,
+            fileType: getFileType(f.filename),
+          }));
+          return {
+            files: [...s.files, ...filesWithType],
+            filename: s.files.length === 0 ? newFiles[0]?.filename : s.filename,
+            fileBuffer: s.files.length === 0 ? newFiles[0]?.buffer : s.fileBuffer,
+            fileType: s.files.length === 0 ? getFileType(newFiles[0]?.filename) : s.fileType,
+            status: "idle",
+          };
+        }),
 
       removeFile: (id) =>
         set((s) => {
@@ -71,6 +88,7 @@ export const usePipelineStore = create<PipelineState & PipelineActions>()(
             files: remaining,
             filename: remaining[0]?.filename ?? null,
             fileBuffer: remaining[0]?.buffer ?? null,
+            fileType: remaining[0]?.fileType ?? null,
             activeFileIndex: Math.min(s.activeFileIndex, Math.max(0, remaining.length - 1)),
           };
         }),
@@ -85,7 +103,7 @@ export const usePipelineStore = create<PipelineState & PipelineActions>()(
       setActiveFileIndex: (index) => set({ activeFileIndex: index }),
 
       clearFiles: () =>
-        set({ files: [], activeFileIndex: 0, filename: null, fileBuffer: null }),
+        set({ files: [], activeFileIndex: 0, filename: null, fileBuffer: null, fileType: null }),
 
       reset: () => {
         import("./pdfjs").then((m) => m.clearCachedDocument());
@@ -98,11 +116,10 @@ export const usePipelineStore = create<PipelineState & PipelineActions>()(
         const persisted = { ...state as unknown as Record<string, unknown> };
         delete persisted.fileBuffer;
         delete persisted.textItems;
-        // Don't persist file buffers or text items from batch files either
         if (persisted.files && Array.isArray(persisted.files)) {
           persisted.files = (persisted.files as Array<Record<string, unknown>>).map(
             (f) => {
-              const { buffer, textItems, pdfBytes, ...rest } = f;
+              const { buffer, textItems, redactedBytes, ...rest } = f;
               return rest;
             }
           );

@@ -10,24 +10,48 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Download, Clock, AlertTriangle, FileBadge } from "lucide-react";
+import {
+  Download,
+  Clock,
+  AlertTriangle,
+  FileBadge,
+  FileText,
+  FileSpreadsheet,
+} from "lucide-react";
+import type { FileType } from "@/lib/types";
+
+const MIME_TYPES: Record<FileType, string> = {
+  pdf: "application/pdf",
+  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+};
+
+const FILE_LABELS: Record<FileType, string> = {
+  pdf: "Redacted PDF ready",
+  docx: "Redacted Word ready",
+  xlsx: "Redacted Excel ready",
+};
 
 interface DownloadBarProps {
-  pdfBytes: Uint8Array | null;
+  redactedBytes: Uint8Array | null;
+  fileType?: FileType;
   reportBytes?: Uint8Array | null;
   filename: string;
   onReset: () => void;
 }
 
-export function DownloadBar({ pdfBytes, reportBytes, filename, onReset }: DownloadBarProps) {
+export function DownloadBar({ redactedBytes, fileType = "pdf", reportBytes, filename, onReset }: DownloadBarProps) {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [seconds, setSeconds] = useState(60);
   const [downloaded, setDownloaded] = useState(false);
   const [reportDownloaded, setReportDownloaded] = useState(false);
 
+  const mimeType = MIME_TYPES[fileType];
+  const fileLabel = FILE_LABELS[fileType];
+
   const doDownload = useCallback(() => {
-    if (!pdfBytes) return;
-    const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" });
+    if (!redactedBytes) return;
+    const blob = new Blob([redactedBytes as BlobPart], { type: mimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -38,7 +62,7 @@ export function DownloadBar({ pdfBytes, reportBytes, filename, onReset }: Downlo
     URL.revokeObjectURL(url);
     setDownloaded(true);
     setShowDisclaimer(false);
-  }, [pdfBytes, filename]);
+  }, [redactedBytes, filename, mimeType]);
 
   const doDownloadReport = useCallback(() => {
     if (!reportBytes) return;
@@ -61,18 +85,23 @@ export function DownloadBar({ pdfBytes, reportBytes, filename, onReset }: Downlo
     return () => clearInterval(timer);
   }, [seconds]);
 
-  if (!pdfBytes) return null;
+  if (!redactedBytes) return null;
 
   const outFilename = `redacted-${filename}`;
+
+  const FileIcon = fileType === "xlsx" ? FileSpreadsheet : fileType === "docx" ? FileText : null;
 
   return (
     <>
       <div className="border-t bg-white px-6 py-4">
         <div className="max-w-2xl mx-auto space-y-3">
           <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium text-gray-900">{outFilename}</p>
-              <p className="text-sm text-gray-500">Redacted PDF ready</p>
+            <div className="flex items-center gap-2">
+              {FileIcon && <FileIcon className="w-4 h-4 text-slate-500" />}
+              <div>
+                <p className="font-medium text-gray-900">{outFilename}</p>
+                <p className="text-sm text-gray-500">{fileLabel}</p>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               {downloaded ? (

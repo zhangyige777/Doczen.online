@@ -8,6 +8,8 @@ export type PiiType =
   | "financial_account"
   | "custom";
 
+export type FileType = "pdf" | "docx" | "xlsx";
+
 export const PII_TYPE_LABELS: Record<PiiType, string> = {
   name: "Name",
   phone: "Phone",
@@ -74,18 +76,20 @@ export type PipelineStatus =
 export interface BatchFile {
   id: string;
   filename: string;
+  fileType: FileType;
   buffer: ArrayBuffer;
   status: PipelineStatus;
   totalPages: number;
   textItems: TextItem[];
   detections: DetectionItem[];
   error: string | null;
-  pdfBytes: Uint8Array | null;
+  redactedBytes: Uint8Array | null;
 }
 
 export interface PipelineState {
   sessionId: string | null;
   filename: string | null;
+  fileType: FileType | null;
   instruction: string;
   status: PipelineStatus;
   statusMessage: string;
@@ -102,6 +106,7 @@ export interface PipelineState {
 export interface PipelineActions {
   setSessionId: (id: string) => void;
   setFile: (buffer: ArrayBuffer, filename: string) => void;
+  setFileType: (type: FileType) => void;
   setInstruction: (instruction: string) => void;
   startPipeline: () => void;
   setStatus: (status: PipelineStatus, message?: string) => void;
