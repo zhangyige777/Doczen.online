@@ -8,5 +8,4 @@ export const GET = Checkout({
   apiKey: process.env.CREEM_API_KEY!,
   testMode: isTestMode,
   defaultSuccessUrl: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3001"}/thank-you`,
-  defaultCancelUrl: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3001"}/pricing`,
 });
