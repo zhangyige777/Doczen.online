@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 const API_KEY = process.env.DOCZEN_API_KEY!;
 const BASE_URL = process.env.DOCZEN_API_URL || "https://api.apimart.ai/v1";
 

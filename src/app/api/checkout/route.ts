@@ -1,5 +1,7 @@
 import { Checkout } from "@creem_io/nextjs";
 
+export const runtime = "edge";
+
 const isTestMode = process.env.CREEM_TEST_MODE !== undefined
   ? process.env.CREEM_TEST_MODE === "true"
   : process.env.NODE_ENV !== "production";
