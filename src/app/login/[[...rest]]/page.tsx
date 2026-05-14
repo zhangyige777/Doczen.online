@@ -1,6 +1,6 @@
-export const runtime = "edge";
-
 "use client";
+
+export const runtime = "edge";
 
 import { SignIn } from "@clerk/nextjs";
 import Link from "next/link";
