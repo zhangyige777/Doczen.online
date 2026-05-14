@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:deploy": "npm run pages:build && wrangler pages deploy",
+    "pages:preview": "npm run pages:build && wrangler pages dev",
+    "cf:deploy": "npm run pages:build && wrangler pages deploy --commit-dirty"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
