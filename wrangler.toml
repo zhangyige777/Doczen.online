@@ -1,0 +1,6 @@
+name = "doczen"
+pages_build_output_dir = ".vercel/output/static"
+compatibility_date = "2025-05-12"
+
+[env.production]
+vars = {}
