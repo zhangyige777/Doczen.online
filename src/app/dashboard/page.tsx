@@ -23,7 +23,7 @@ export default function DashboardPage() {
   const [auditLog, setAuditLog] = useState<AuditEntry[]>(() => {
     if (typeof window !== "undefined") {
       try {
-        const raw = localStorage.getItem("doczen-audit-log");
+        const raw = localStorage.getItem("redactly-audit-log");
         return raw ? JSON.parse(raw) : [];
       } catch {
         return [];
@@ -40,7 +40,7 @@ export default function DashboardPage() {
   const totalDetections = auditLog.reduce((s, e) => s + e.detectionsTotal, 0);
 
   const clearLog = () => {
-    localStorage.removeItem("doczen-audit-log");
+    localStorage.removeItem("redactly-audit-log");
     setAuditLog([]);
   };
 

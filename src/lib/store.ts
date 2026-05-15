@@ -111,7 +111,7 @@ export const usePipelineStore = create<PipelineState & PipelineActions>()(
       },
     }),
     {
-      name: "doczen-pipeline",
+      name: "redactly-pipeline",
       partialize: (state) => {
         const persisted = { ...state as unknown as Record<string, unknown> };
         delete persisted.fileBuffer;

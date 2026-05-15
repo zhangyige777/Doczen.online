@@ -1,4 +1,4 @@
-const SUB_KEY = "doczen-subscription";
+const SUB_KEY = "redactly-subscription";
 
 export interface SubscriptionState {
   plan: "free" | "pro";
@@ -28,7 +28,7 @@ export function setSubscription(data: Partial<SubscriptionState>) {
 export function getPagesUsed(): number {
   if (typeof window === "undefined") return 0;
   try {
-    const raw = localStorage.getItem("doczen-audit-log");
+    const raw = localStorage.getItem("redactly-audit-log");
     if (raw) {
       const log = JSON.parse(raw) as { pages: number }[];
       return log.reduce((sum, e) => sum + e.pages, 0);

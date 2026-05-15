@@ -10,7 +10,7 @@ export interface AuditEntry {
   piiTypes: Record<string, number>;
 }
 
-const STORAGE_KEY = "doczen-audit-log";
+const STORAGE_KEY = "redactly-audit-log";
 
 export function loadAuditLog(): AuditEntry[] {
   try {

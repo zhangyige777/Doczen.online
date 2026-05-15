@@ -28,7 +28,7 @@ export default function ContactPage() {
           <div className="p-6 rounded-xl border border-gray-100 text-center">
             <Mail className="w-6 h-6 text-blue-600 mx-auto mb-3" />
             <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-            <p className="text-sm text-gray-500">hello@doczen.ai</p>
+            <p className="text-sm text-gray-500">hello@redactly.online</p>
           </div>
           <div className="p-6 rounded-xl border border-gray-100 text-center">
             <MessageSquare className="w-6 h-6 text-blue-600 mx-auto mb-3" />

@@ -60,7 +60,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">5. Your Rights</h2>
           <p>
-            You have the right to access, correct, or delete your account information at any time. For document processing, since we do not store your documents, there is no document data to request. If you have questions about this policy, please contact us at privacy@doczen.ai.
+            You have the right to access, correct, or delete your account information at any time. For document processing, since we do not store your documents, there is no document data to request. If you have questions about this policy, please contact us at privacy@redactly.online.
           </p>
         </section>
 
@@ -74,8 +74,8 @@ export default function PrivacyPage() {
         <div className="pt-8 border-t">
           <p className="text-sm text-gray-400">
             If you have questions, please contact us at{" "}
-            <a href="mailto:privacy@doczen.ai" className="text-blue-600 hover:underline">
-              privacy@doczen.ai
+            <a href="mailto:privacy@redactly.online" className="text-blue-600 hover:underline">
+              privacy@redactly.online
             </a>
             {" "}or visit our{" "}
             <Link href="/contact" className="text-blue-600 hover:underline">
