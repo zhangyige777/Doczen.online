@@ -303,9 +303,11 @@ export default function HomePage() {
         {/* Processing state */}
         {isProcessing && (
           <div className="flex-1 flex items-center justify-center">
-            <div className="text-center space-y-4">
-              <Loader2 className="w-8 h-8 animate-spin text-amber-600 mx-auto" />
-              <StepIndicator status={status} />
+            <div className="text-center space-y-3">
+              <Loader2 className="w-10 h-10 animate-spin text-amber-600 mx-auto" />
+              <p className="text-sm text-slate-500">
+                {status === "extracting" ? "Reading document..." : "AI analyzing sensitive information..."}
+              </p>
             </div>
           </div>
         )}
