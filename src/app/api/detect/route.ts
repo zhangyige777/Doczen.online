@@ -1,8 +1,5 @@
 export const runtime = "edge";
 
-const API_KEY = process.env.DOCZEN_API_KEY!;
-const BASE_URL = process.env.DOCZEN_API_URL || "https://api.apimart.ai/v1";
-
 const SYSTEM_PROMPT = `You are a PII (Personally Identifiable Information) detection engine for document redaction. Your task is to identify sensitive information in legal, medical, HR, and financial documents.
 
 ## Detection Categories
@@ -37,6 +34,17 @@ Return a JSON object with a "detections" array. Each detection must have:
 
 export async function POST(request: Request) {
   try {
+    const API_KEY = process.env.DOCZEN_API_KEY;
+    const BASE_URL = process.env.DOCZEN_API_URL || "https://api.apimart.ai/v1";
+
+    if (!API_KEY) {
+      console.error("DOCZEN_API_KEY is not set");
+      return Response.json(
+        { error: "API key not configured" },
+        { status: 500 }
+      );
+    }
+
     const body = await request.json();
     const { pages, instruction } = body as {
       pages: { page_number: number; text: string }[];

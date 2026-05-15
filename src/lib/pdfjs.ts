@@ -6,7 +6,7 @@ let cachedDoc: PDFDocumentProxy | null = null;
 export async function getPdfjs() {
   if (!pdfjsModule) {
     pdfjsModule = await import("pdfjs-dist");
-    pdfjsModule.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+    pdfjsModule.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjsModule.version}/build/pdf.worker.min.mjs`;
   }
   return pdfjsModule;
 }
@@ -17,9 +17,8 @@ export async function loadPdfDocument(data: ArrayBuffer): Promise<PDFDocumentPro
     cachedDoc.destroy();
   }
   cachedDoc = await pdfjs.getDocument({
-    data: data.slice(0),
-    disableAutoFetch: true,
-    disableStream: true,
+    data: new Uint8Array(data),
+    useSystemFonts: true,
   }).promise;
   return cachedDoc;
 }
