@@ -121,11 +121,10 @@ export default function HomePage() {
 
   const handleStart = () => {
     setInstruction(instruction);
+    window.scrollTo(0, 0);
     if (isBatch || (files.length === 1 && !fileBuffer)) {
-      // Batch mode: process all files automatically
       runBatchPipeline();
     } else {
-      // Single file: existing review flow
       startPipeline();
     }
   };
