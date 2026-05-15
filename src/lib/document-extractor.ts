@@ -1,5 +1,6 @@
 /**
  * Unified text extraction for PDF, Word (.docx), and Excel (.xlsx) files.
+ * mammoth and xlsx use dynamic imports to avoid Edge Runtime crashes (require("fs")).
  */
 import { loadPdfDocument } from "./pdfjs";
 import type { TextItem, ViewportBBox } from "./types";
@@ -76,34 +77,30 @@ async function extractTextFromPDF(buffer: ArrayBuffer): Promise<ExtractedData> {
   return { textItems: allItems, totalPages, viewportBboxes: bboxMap, fileType: "pdf" };
 }
 
-// ─── Word (.docx) ────────────────────────────────────────────────────────────
-
-import mammoth from "mammoth";
+// ─── Word (.docx) — dynamic import for Edge Runtime compat ───────────────────
 
 async function extractTextFromDocx(buffer: ArrayBuffer): Promise<ExtractedData> {
+  const mammoth = await import("mammoth");
   const result = await mammoth.extractRawText({ arrayBuffer: buffer });
   const fullText = result.value;
 
   const allItems: TextItem[] = [];
   const bboxMap = new Map<string, ViewportBBox>();
-
-  // Split into paragraphs/lines
   const lines = fullText.split(/\r?\n/).filter((l) => l.trim().length > 0);
   let textItemIndex = 0;
 
   lines.forEach((line, paragraphIndex) => {
     const textItem: TextItem = {
       str: line,
-      transform: [0, 0, 0, 0, 0, paragraphIndex * 20], // dummy transform
+      transform: [0, 0, 0, 0, 0, paragraphIndex * 20],
       width: 0,
       height: 14,
       fontName: "",
-      pageNumber: 1, // Word docs treated as single "page" for detection
+      pageNumber: 1,
       textItemIndex,
     };
     allItems.push(textItem);
 
-    // For redaction we store a simple positional index
     bboxMap.set(`1-${textItemIndex}`, {
       x: 0,
       y: paragraphIndex * 20,
@@ -114,19 +111,13 @@ async function extractTextFromDocx(buffer: ArrayBuffer): Promise<ExtractedData> 
     textItemIndex++;
   });
 
-  return {
-    textItems: allItems,
-    totalPages: 1,
-    viewportBboxes: bboxMap,
-    fileType: "docx",
-  };
+  return { textItems: allItems, totalPages: 1, viewportBboxes: bboxMap, fileType: "docx" };
 }
 
-// ─── Excel (.xlsx) ───────────────────────────────────────────────────────────
-
-import * as XLSX from "xlsx";
+// ─── Excel (.xlsx) — dynamic import for Edge Runtime compat ──────────────────
 
 async function extractTextFromXlsx(buffer: ArrayBuffer): Promise<ExtractedData> {
+  const XLSX = await import("xlsx");
   const workbook = XLSX.read(buffer, { type: "array" });
   const allItems: TextItem[] = [];
   const bboxMap = new Map<string, ViewportBBox>();
@@ -150,7 +141,7 @@ async function extractTextFromXlsx(buffer: ArrayBuffer): Promise<ExtractedData> 
           width: value.length * 7,
           height: 14,
           fontName: "",
-          pageNumber: 1, // Excel treated as single "page"
+          pageNumber: 1,
           textItemIndex,
         };
         allItems.push(textItem);
@@ -167,20 +158,11 @@ async function extractTextFromXlsx(buffer: ArrayBuffer): Promise<ExtractedData> 
     }
   }
 
-  return {
-    textItems: allItems,
-    totalPages: 1,
-    viewportBboxes: bboxMap,
-    fileType: "xlsx",
-  };
+  return { textItems: allItems, totalPages: 1, viewportBboxes: bboxMap, fileType: "xlsx" };
 }
 
-// ─── Text-only extraction for AI detection ───────────────────────────────────
+// ─── Plain text for AI detection ─────────────────────────────────────────────
 
-/**
- * Returns plain text from any supported document, used to build
- * the pages payload for /api/detect.
- */
 export async function extractPlainText(buffer: ArrayBuffer, filename: string): Promise<string> {
   const ext = filename.toLowerCase().split(".").pop();
 
@@ -198,9 +180,11 @@ export async function extractPlainText(buffer: ArrayBuffer, filename: string): P
     }
     return lines.join("\n\n");
   } else if (ext === "docx") {
+    const mammoth = await import("mammoth");
     const result = await mammoth.extractRawText({ arrayBuffer: buffer });
     return result.value;
   } else if (ext === "xlsx") {
+    const XLSX = await import("xlsx");
     const workbook = XLSX.read(buffer, { type: "array" });
     const parts: string[] = [];
     for (const name of workbook.SheetNames) {

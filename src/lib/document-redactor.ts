@@ -1,12 +1,10 @@
 /**
  * Unified redaction for PDF, Word (.docx), and Excel (.xlsx) files.
+ * mammoth, xlsx, jszip use dynamic imports for Edge Runtime compat.
  */
 import { PDFDocument, rgb } from "pdf-lib";
-import type { DetectionItem, ViewportBBox } from "./types";
+import type { DetectionItem } from "./types";
 import { viewportToPdfLibBbox } from "./coordinates";
-
-import mammoth from "mammoth";
-import * as XLSX from "xlsx";
 
 const PAD = 2;
 const REDACT_COLOR = rgb(0.08, 0.08, 0.08);
@@ -60,72 +58,51 @@ async function applyPdfRedactions(buffer: ArrayBuffer, detections: DetectionItem
   return await pdfDoc.save();
 }
 
-// ─── Word (.docx) ────────────────────────────────────────────────────────────
-
-interface DocxReplacement {
-  text: string;
-  page: number;
-  paragraphIdx: number;
-}
+// ─── Word (.docx) — dynamic imports for Edge Runtime ────────────────────────
 
 async function applyDocxRedactions(buffer: ArrayBuffer, detections: DetectionItem[]): Promise<Uint8Array> {
-  // Step 1: Find which paragraphs contain the text to redact
+  const mammoth = await import("mammoth");
+
   const result = await mammoth.extractRawText({ arrayBuffer: buffer });
   const fullText = result.value;
   const lines = fullText.split(/\r?\n/);
 
-  const replacements: DocxReplacement[] = [];
+  const replacementMap = new Map<string, string>();
 
   for (const detection of detections.filter((d) => d.kept)) {
     const target = detection.text.toLowerCase();
-
-    lines.forEach((line, paragraphIdx) => {
-      if (line.toLowerCase().includes(target)) {
-        replacements.push({
-          text: detection.text,
-          page: 1,
-          paragraphIdx,
-        });
+    lines.forEach((line) => {
+      if (line.toLowerCase().includes(target) && !replacementMap.has(detection.text)) {
+        replacementMap.set(detection.text, "█".repeat(Math.max(detection.text.length, 6)));
       }
     });
   }
 
-  // Step 2: Build replacement map (text → redacted version)
-  const replacementMap = new Map<string, string>();
-  for (const r of replacements) {
-    if (!replacementMap.has(r.text)) {
-      // Replace with ██████ of similar length
-      replacementMap.set(r.text, "█".repeat(Math.max(r.text.length, 6)));
-    }
-  }
+  const JSZip = (await import("jszip")).default;
+  const zip = new JSZip();
+  await zip.loadAsync(buffer);
 
-  // Step 3: Load docx as a zip and modify the document XML
-  const zip = await import("jszip").then((m) => m.default);
-  const jszip = new zip();
-  await jszip.loadAsync(buffer);
-
-  const documentXml = await jszip.file("word/document.xml")?.async("string");
+  const documentXml = await zip.file("word/document.xml")?.async("string");
   if (!documentXml) throw new Error("Invalid docx: missing document.xml");
 
   let modifiedXml = documentXml;
 
-  // Replace each target text with ██████
   for (const [original, replacement] of replacementMap) {
-    // Escape special regex chars
     const escaped = original.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const regex = new RegExp(escaped, "g");
-    modifiedXml = modifiedXml.replace(regex, replacement);
+    modifiedXml = modifiedXml.replace(new RegExp(escaped, "g"), replacement);
   }
 
-  jszip.file("word/document.xml", modifiedXml);
+  zip.file("word/document.xml", modifiedXml);
 
-  const outputBuffer = await jszip.generateAsync({ type: "nodebuffer" });
-  return new Uint8Array(outputBuffer);
+  // Use "uint8array" instead of "nodebuffer" — Edge Runtime has no Buffer
+  const outputBuffer = await zip.generateAsync({ type: "uint8array" });
+  return outputBuffer;
 }
 
-// ─── Excel (.xlsx) ───────────────────────────────────────────────────────────
+// ─── Excel (.xlsx) — dynamic import for Edge Runtime ────────────────────────
 
 async function applyXlsxRedactions(buffer: ArrayBuffer, detections: DetectionItem[]): Promise<Uint8Array> {
+  const XLSX = await import("xlsx");
   const workbook = XLSX.read(buffer, { type: "array" });
 
   const toRedactSet = new Set<string>();
@@ -146,11 +123,10 @@ async function applyXlsxRedactions(buffer: ArrayBuffer, detections: DetectionIte
         const value = String(cell.v);
         for (const target of toRedactSet) {
           if (value.includes(target)) {
-            // Replace the cell value with ██████
             sheet[cellAddr] = {
               ...cell,
               v: "█".repeat(Math.max(target.length, 6)),
-              t: "s", // string type
+              t: "s",
             };
           }
         }
@@ -162,12 +138,12 @@ async function applyXlsxRedactions(buffer: ArrayBuffer, detections: DetectionIte
   return new Uint8Array(outputBuffer);
 }
 
-// ─── PDF-only legacy export (for backwards compatibility) ───────────────────
+// ─── PDF-only legacy export ──────────────────────────────────────────────────
 
 export async function applyRedactions(
   fileBuffer: ArrayBuffer,
   detections: DetectionItem[],
-  scale: number = 1.5
+  _scale?: number
 ): Promise<Uint8Array> {
   return applyPdfRedactions(fileBuffer, detections);
 }
