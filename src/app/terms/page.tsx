@@ -48,22 +48,35 @@ export default function TermsPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">5. Subscription and Payment</h2>
           <p className="mb-3">
-            Free tier: 20 pages per month at no cost. No credit card required. Pro tier: $19/month for 200 pages, advanced features, and priority support. Enterprise: custom pricing.
+            Free tier: 20 pages per month at no cost. No credit card required. Pro tier: $19/month ($180/year for annual billing) for 200 pages, advanced features, and priority support. Enterprise: custom pricing.
           </p>
           <p>
-            Subscription fees are non-refundable except as required by applicable law. You may cancel your subscription at any time; access continues through the end of the current billing period.
+            You may cancel your subscription at any time by contacting <a href="mailto:support@redactly.online" className="text-blue-600 hover:underline">support@redactly.online</a> or from your dashboard. Access continues through the end of the current billing period.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">6. Limitation of Liability</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">6. Refund Policy</h2>
+          <p className="mb-3">
+            We want you to be satisfied with Redactly. If you are not happy with your purchase, you may request a refund within 14 days of your initial subscription purchase by contacting <a href="mailto:support@redactly.online" className="text-blue-600 hover:underline">support@redactly.online</a>.
+          </p>
+          <p className="mb-3">
+            Refund requests are reviewed on a case-by-case basis. We aim to respond to all refund requests within 3 business days. Refunds, if approved, will be processed back to the original payment method within 5–10 business days.
+          </p>
+          <p>
+            Refunds are not available for partial billing periods after the 14-day window. If you believe there has been an error in billing, please contact us immediately and we will investigate.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">8. Limitation of Liability</h2>
           <p>
             To the fullest extent permitted by law, Redactly and its operators shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service, including but not limited to damages resulting from incomplete redaction, data leaks, or compliance failures.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Termination</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-3">9. Termination</h2>
           <p>
             We reserve the right to suspend or terminate access to the Service for violations of these terms. Upon termination, your right to use the Service ceases immediately. Account data will be retained for 30 days before deletion, unless otherwise required by law.
           </p>
@@ -71,9 +84,11 @@ export default function TermsPage() {
 
         <div className="pt-8 border-t">
           <p className="text-sm text-gray-400">
-            Questions about these terms?{" "}
+            Questions about these terms? Email{" "}
+            <a href="mailto:support@redactly.online" className="text-blue-600 hover:underline">support@redactly.online</a>
+            {" "}or{" "}
             <Link href="/contact" className="text-blue-600 hover:underline">
-              Contact us
+              contact us
             </Link>
             .
           </p>

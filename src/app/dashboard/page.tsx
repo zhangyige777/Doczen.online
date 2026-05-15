@@ -133,9 +133,17 @@ export default function DashboardPage() {
               </Link>
             )}
             {subscription.plan === "pro" && (
-              <Link href="/pricing">
-                <Button variant="outline" size="sm">Manage Plan</Button>
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link href="/pricing">
+                  <Button variant="outline" size="sm">Manage Plan</Button>
+                </Link>
+                <a
+                  href="mailto:support@redactly.online?subject=Cancel%20Subscription"
+                  className="text-xs text-gray-400 hover:text-red-500 transition-colors"
+                >
+                  Cancel subscription
+                </a>
+              </div>
             )}
           </div>
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileText } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 
 export function Footer() {
   return (
@@ -40,6 +40,10 @@ export function Footer() {
             <div className="space-y-2">
               <Link href="/privacy" className="block text-sm text-gray-500 hover:text-gray-900 transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="block text-sm text-gray-500 hover:text-gray-900 transition-colors">Terms of Service</Link>
+              <a href="mailto:support@redactly.online" className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors">
+                <Mail className="w-3.5 h-3.5" />
+                support@redactly.online
+              </a>
             </div>
           </div>
         </div>
