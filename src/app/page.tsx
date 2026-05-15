@@ -137,12 +137,6 @@ export default function HomePage() {
       setPdfBytes(result);
 
       const storeState = usePipelineStore.getState();
-      // saveAuditEntry(
-      //   storeState.sessionId || crypto.randomUUID(),
-      //   filename,
-      //   storeState.totalPages,
-      //   detections
-      // );
 
       try {
         const report = await generateReportPdf(
@@ -152,9 +146,12 @@ export default function HomePage() {
           result
         );
         setReportBytes(report);
-      } catch {}
+      } catch (reportErr) {
+        console.error("Report generation failed:", reportErr);
+      }
     } catch (err) {
       console.error("Redaction failed:", err);
+      setError(err instanceof Error ? err.message : "Redaction failed");
     } finally {
       setRedacting(false);
     }

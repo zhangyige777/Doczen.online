@@ -17,8 +17,7 @@ export async function loadPdfDocument(data: ArrayBuffer): Promise<PDFDocumentPro
     cachedDoc.destroy();
   }
   cachedDoc = await pdfjs.getDocument({
-    data: new Uint8Array(data),
-    useSystemFonts: true,
+    data: new Uint8Array(data.slice(0)),
   }).promise;
   return cachedDoc;
 }
