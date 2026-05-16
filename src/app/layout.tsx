@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
@@ -97,7 +97,18 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
         <body className="min-h-full flex flex-col">
-          <GoogleAnalytics gaId="G-D7WPV50MBB" />
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-D7WPV50MBB"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-D7WPV50MBB');
+            `}
+          </Script>
           <TooltipProvider>
             <Nav />
             <main className="flex-1">{children}</main>
